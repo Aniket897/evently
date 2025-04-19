@@ -1,22 +1,26 @@
 "use client";
 
-import EventCard from "./event-card";
-import Filter from "../filter";
-import { useEffect, useState } from "react";
-import EventCardFallback from "./event-card-fallback";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Booking, Event } from "@prisma/client";
-import ResultNotFound from "../result-not-found";
+
+import EventCard from "@/components/event/event-card";
+import Filter from "@/components/filter";
+import EventCardFallback from "@/components/event/event-card-fallback";
+import ResultNotFound from "@/components/result-not-found";
+import { useDebounce } from "@/hooks/use-debounce";
 
 export default function Events() {
   const [events, setEvents] = useState<(Event & { bookings: Booking[] })[]>([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [filterString, setFilterString] = useState("");
+  const controller = useRef<AbortController | null>(null);
+  const debounceFilterString = useDebounce(filterString, 1000);
 
   useEffect(() => {
     fetchAllEvents();
-  }, [filterString]); // refetch when filter changes
+  }, [debounceFilterString]);
 
   const handleFilterString = (newFilterString: string) => {
     setFilterString(newFilterString);
@@ -24,11 +28,17 @@ export default function Events() {
 
   const fetchAllEvents = async () => {
     try {
+      if (controller.current) {
+        controller.current.abort();
+      }
+      controller.current = new AbortController();
       setLoading(true);
       setIsError(false);
       const {
         data: { events },
-      } = await axios.get(`/api/event?q=${filterString}`);
+      } = await axios.get(`/api/event?q=${debounceFilterString}`, {
+        signal: controller.current.signal,
+      });
       setEvents(events);
     } catch (error) {
       console.error("Error fetching events:", error);

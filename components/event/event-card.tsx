@@ -48,7 +48,7 @@ export default function EventCard({
   const handleBookEvent = async () => {
     try {
       setLoading(true);
-      const response = await axios.post(`/api/event/book`, {
+      const response = await axios.post(`/api/book`, {
         id,
       });
       console.log(response);

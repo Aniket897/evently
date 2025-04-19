@@ -14,14 +14,13 @@ export default function Filter({ onchange }: FilterProps) {
           All Events
         </h1>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 relative">
         <Input
+          placeholder="search here"
           onChange={(e) => onchange(e.target.value)}
-          className="w-[300px] max-w-[90vw] rounded-3xl"
+          className="w-[300px] max-w-[90vw] rounded-3xl pl-[35px]"
         />
-        <Button className="rounded-3xl bg-rose-500 hover:bg-rose-500/90">
-          <Search />
-        </Button>
+        <Search size={20} className="absolute top-[7px] left-[10px] text-neutral-600" />
       </div>
     </div>
   );
