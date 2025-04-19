@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔐 Next.js App with NextAuth, Tailwind CSS, and Prisma
 
-## Getting Started
+This is a full-stack application built with **Next.js (App Router)**, **NextAuth.js** for authentication, **Tailwind CSS** for styling, and **Prisma** for database ORM.
 
-First, run the development server:
+---
+
+## 🚀 Tech Stack
+
+- **Next.js** (App Router)
+- **NextAuth.js**
+- **Tailwind CSS**
+- **Prisma**
+- **PostgreSQL / Mysql** (or any supported Prisma database)
+
+---
+
+## 📂 Folder Structure (No `src`, using `/app`)
+
+```
+📁 app
+│   ├── api
+│   │   └── auth
+│   │   │   └── [...nextauth]          # NextAuth API route
+│       ├── login                      # Login page
+│   ├── dashboard                      # Protected routes
+│   └── page.tsx                       # Home page
+│
+📁 components                          # Reusable UI components
+📁 lib                                 # Helpers, db, auth utils
+│   ├── auth.ts                        # NextAuth config
+│   └── prisma.ts                      # Prisma client
+├── .env                               # Local environment variables
+├── tailwind.config.ts                 # Tailwind config
+├── tsconfig.json                      # TypeScript config
+├── prisma
+│   └── schema.prisma                  # Prisma schema
+├── package.json
+└── README.md
+```
+
+---
+
+## 🛠️ Local Development Setup
+
+### 1. **Clone the Repository**
+
+```bash
+git clone https://github.com/yourusername/yourproject.git
+cd yourproject
+```
+
+### 2. **Install Dependencies**
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. **Setup Environment Variables**
+
+Create a `.env.local` file in the root directory:
+
+```env
+DATABASE_URL=postgresql://USER:PASSWORD@localhost:5432/mydb
+NEXTAUTH_SECRET=your-secret
+```
+
+> Replace values accordingly.
+
+### 4. **Generate Prisma Client & Migrate**
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name init
+```
+
+### 5. **Run the Development Server**
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔐 Authentication
 
-## Learn More
+- Uses **NextAuth.js** with credential support.
+- Configure providers in `lib/auth.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Styling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Styled with **Tailwind CSS**.
+- Pre-configured `tailwind.config.ts` and `postcss.config.js`.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧩 Prisma ORM
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Prisma handles database models and queries.
+- Modify the schema in `prisma/schema.prisma` and run:
+
+```bash
+npx prisma migrate dev --name your-migration-name
+```
+
+---
+
+## 📦 Deployment
+
+Supports deployment on **Vercel**, **Railway**, **Render**, etc.  
+Ensure you set the same `.env` variables in the deployment environment.
+
+---

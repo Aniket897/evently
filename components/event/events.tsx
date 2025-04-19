@@ -40,11 +40,13 @@ export default function Events() {
         signal: controller.current.signal,
       });
       setEvents(events);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-      setIsError(true);
-    } finally {
       setLoading(false);
+    } catch (error) {
+      if (!axios.isCancel(error)) {
+        console.error("Error fetching events:", error);
+        setIsError(true);
+        setLoading(false);
+      }
     }
   };
 
@@ -78,8 +80,11 @@ function FallbackGrid() {
 
 function ErrorMessage() {
   return (
-    <div className="text-red-500 text-center text-lg font-medium">
-      Something went wrong while fetching events. Please try again later.
+    <div className="text-red-500 text-center flex items-center justify-center min-h-[50vh] flex-col gap-3 text-3xl font-bold">
+      <h1>😔</h1>
+      <h1>
+        Something went wrong while fetching events. Please try again later.
+      </h1>
     </div>
   );
 }

@@ -15,6 +15,7 @@ import {
   Lock,
   Check,
 } from "lucide-react";
+import { toast } from "sonner";
 
 interface EventCardProps extends Event {
   index: number;
@@ -53,8 +54,12 @@ export default function EventCard({
       });
       console.log(response);
       setIsBooked(true);
-    } catch (error) {
+      toast.success("Congratulations, Event booked!");
+    } catch (error: any) {
       console.log(error);
+      const errorMessage =
+        error?.response?.data.message || "Something went wrong!";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

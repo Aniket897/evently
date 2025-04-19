@@ -72,7 +72,7 @@ export default function LoginForm() {
     <div className="flex items-center justify-center min-h-screen">
       <form
         onSubmit={handleSubmit}
-        className="w-[500px] max-w-[90vw] border rounded-md p-8 space-y-8 border-t-green-500 border-t-4"
+        className="w-[500px] max-w-[90vw] border rounded-md p-8 space-y-8 border-t-rose-500 border-t-4"
       >
         <h1 className="font-bold text-xl capitalize underline underline-offset-8">
           Login to your account
@@ -100,9 +100,19 @@ export default function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <Button disabled={loading} className="w-full">
-          Login
-          <ArrowRight />
+        <Button
+          disabled={loading}
+          className="w-full rounded-3xl bg-rose-500 hover:bg-rose-500/90"
+        >
+          {loading ? (
+            <>Loading...</>
+          ) : (
+            <>
+              {" "}
+              Login
+              <ArrowRight />
+            </>
+          )}
         </Button>
         {message && <Message {...message} />}
         <Link
