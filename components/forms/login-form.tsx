@@ -45,7 +45,7 @@ export default function LoginForm() {
         console.log(response);
         setMessage({
           error: true,
-          message: response.error,
+          message: "Wrong Credentials",
         });
         return;
       }

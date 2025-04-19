@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/prisma/auth";
 import { Ticket } from "lucide-react";
 import Logout from "./logout";
 
@@ -8,9 +8,9 @@ export default async function Navbar() {
 
   return (
     <div>
-      <div className="p-4 border-b shadow flex items-center justify-between">
+      <div className="py-4 px-8 border-b shadow flex items-center justify-between">
         <div>
-          <h1 className="font-bold text-xl underline underline-offset-8 flex items-center gap-3">
+          <h1 className="font-bold text-xl flex items-center gap-3">
             <Ticket />
             Evently
           </h1>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Salsa } from "next/font/google";
 import "./globals.css";
-
+import { SessionProvider } from "next-auth/react";
 
 const salsa = Salsa({
   subsets: ["latin"],
@@ -20,10 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${salsa.className} antialiased`}
-      >
-        {children}
+      <body className={`${salsa.className} antialiased`}>
+        <SessionProvider> {children}</SessionProvider>
       </body>
     </html>
   );
