@@ -45,8 +45,8 @@ This is a full-stack application built with **Next.js (App Router)**, **NextAuth
 ### 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/yourusername/yourproject.git
-cd yourproject
+git clone https://github.com/Aniket897/evently
+cd evently
 ```
 
 ### 2. **Install Dependencies**
